@@ -1,5 +1,5 @@
-# Taps-Beers
-Recommender system for local taps and beers, using Untappd API for getting information.
+# Dev events for devs
+Recommender system for events for software developers. Helping to find your own groups to migle.
 
 ## Development environment
 
