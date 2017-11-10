@@ -48,7 +48,9 @@ Event query fields that can be included in the results (Only a subset listed her
 - link of event's page
 
 Queries use longitude and latitude and a distance measure from the specified point.
+
 E.g. Tampere (61.498049, 23.761952) and Helsinki (60.168435, 24.935919)
+
 Tampere hasn't got a lot of events, hence including events from Helsinki might be necessary
 
 Problem is to separate "IT events" from other events just by tags and/or name.
