@@ -94,19 +94,28 @@ Possibly use for example moment.js for easier handling of dates?
 Use map query (https://api.evensi.com/v1.1/event/map/)
 
 Parameters:
+
 {
+
 	date: [2017-11-14]
+
 	lat: 61.498195
+
 	lng: 23.761781
+
 	distance: (5 / 10 / 15 / ?)
+
 	tag: 66,17,69,20,13,117,105,70
+
 	token: []
+
 	fields: name,normalized_name,short_description,description,start_date,end_date,full_day,location,category,category_name,tag,tag_name,updated_time,url
+
 }
 
 These coordinates are for Keskustori in Tampere
 
-### Recommending an events
+## Recommending an events
 
 If user has been to an event with tag T, recommend future events with same tag T.
 
