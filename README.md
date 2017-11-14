@@ -73,3 +73,45 @@ GET https://api.evensi.com/v1.1/event/231172095
 - Fetch events with map or ranked query
 - Fetch details and save **relevant** events to local or cloud database
 - When to recommend an event? What event to recommend?
+
+## Users and events database
+- Fake users
+	- Save favourite categories and tags
+	- Save events, the user has "been to", use ID
+	- Save user's location
+		- City?
+		- Longitude and latitude?
+		- Combination of the two?
+		- The evensi api returns JSON with location info having both the city and the coordinates
+		- Handling might be more straightforward with just the name?
+- Events should be checked from evensi api daily (?), every few days (?)
+	- Saved to database in JSON
+	- Updated events?
+
+### Saving the events
+Possibly use for example moment.js for easier handling of dates?
+
+Use map query (https://api.evensi.com/v1.1/event/map/)
+
+Parameters:
+{
+	date: [2017-11-14]
+	lat: 61.498195
+	lng: 23.761781
+	distance: (5 / 10 / 15 / ?)
+	tag: 66,17,69,20,13,117,105,70
+	token: []
+	fields: name,normalized_name,short_description,description,start_date,end_date,full_day,location,category,category_name,tag,tag_name,updated_time,url
+}
+
+These coordinates are for Keskustori in Tampere
+
+### Recommending an events
+
+If user has been to an event with tag T, recommend future events with same tag T.
+
+If user has not been to any events, recommend popular events among fake users (??). Or recommend the next upcoming IT event?
+
+Should recommended events be close to the current date? If, for example, there are multiple events with suitable tags? Or recommend multiple events?
+
+Should fake users also have some ratings for events???
