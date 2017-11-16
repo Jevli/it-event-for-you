@@ -126,3 +126,4 @@ If user has not been to any events, recommend popular events among fake users (?
 Should recommended events be close to the current date? If, for example, there are multiple events with suitable tags? Or recommend multiple events?
 
 Should fake users also have some ratings for events???
+[Conversation continues](https://github.com/Jevli/it-event-for-you/issues/5)
