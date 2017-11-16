@@ -3,10 +3,12 @@ Recommender system for events for software developers. Helping to find your own 
 
 ## Development environment
 
-1. nodejs 6.11.1 (at least works)
-2. [Serverless Framework](https://serverless.com/framework/docs/getting-started/)
-3. [AWS Access keys](https://serverless.com/framework/docs/providers/aws/guide/credentials#creating-aws-access-keys)
-4. Editor
+1. Install node
+2. Install all depenties
+   ```cd web && npm install```
+3. Start app:
+   - on osx and linux: `DEBUG=web:* npm start`
+   - on windows: `set DEBUG=web:* & npm start`
 
 ## Evensi API
 https://api.evensi.com/v1.1/docs/
