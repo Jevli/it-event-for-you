@@ -10,6 +10,11 @@ Recommender system for events for software developers. Helping to find your own 
    - on osx and linux: `DEBUG=web:* npm start`
    - on windows: `set DEBUG=web:* & npm start`
 
+For running in docker-compose (no need to install local database)
+1. [Install Docker](https://docs.docker.com/engine/installation/)
+2. Run in root folder `docker-compose up --build -d` to start in background
+3. (Later will be added auto reload for changed node changes)
+
 ## Evensi API
 https://api.evensi.com/v1.1/docs/
 
