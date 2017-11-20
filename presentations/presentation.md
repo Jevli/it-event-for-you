@@ -2,6 +2,10 @@ class: middle, center
 
 # Event recommender -- Evensi
 
+---
+
+# What is Evensi
+
 Evensi is an events search engine
 
 70 million events worldwide
@@ -50,18 +54,18 @@ The event we think the most relevant for the user gets recommended
 
 ---
 
-# Dian vaihto tapahtuu
+# Techical stuff
 
-kirjoittamalla kolme kertaa '-' tämän jälkeen
+We will create nodejs server what will collect data from evensi api and analyse recommendations for users.
 
-ja ajaminen tapahtuu:
-
-Find out python version: `python --version`
-
-If Python 2.x:
-`python -m SimpleHTTPServer 8000`
-
-If Python 3.x:
-`python -m http.server`
+First we don't probably do web interface but only API but will create web interface if we got time for it.
 
 ---
+
+# What we have done so far?
+
+- We have access to Evensi api
+- We got this presentation done
+- We got skeleton of code project done
+- We have "plan" for recommending events
+- We probably got end of this week Evensi api router done :)
