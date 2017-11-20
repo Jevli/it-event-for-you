@@ -4,6 +4,13 @@ class: middle, center
 
 ---
 
+# Team
+
+- Joni Laurila
+- Marja Ahonen
+
+---
+
 # What is Evensi
 
 Evensi is an events search engine
