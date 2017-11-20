@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+@page {
+  size: 1024px 768px;
+  margin: 0;
+}
+
+@media print {
+  .remark-slide-scaler {
+    width: 100% !important;
+    height: 100% !important;
+    transform: scale(1) !important;
+    top: 0 !important;
+    left: 0 !important;
+  }
+}
+
+li {
+   margin-bottom: 0.5em;
+}
+
+ul {
+   margin-top: 0.5em;
+}
+
+body {
+   font-family: 'Source Sans Pro', sans-serif;
+}
+
+h1, h2, h3, a {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: normal;
+}
+
+a {
+   color: lightblue;
+   font-family: 'Source Sans Pro', sans-serif;
+}
+
+pre {
+   white-space: pre-wrap;
+}
+
+.remark-code, .remark-inline-code { font-family: 'Source Sans Pro', sans-serif; }
+
+.footnote {
+    font-size: 50%;
+}
+
+body img {
+    max-width: 100%;
+}
+
+.remark-slide-number {
+    bottom: 5%;
+    right: 5%;
+    position: absolute;
+}
+
+.remark-slide-content, .remark-container { }
+
+.remark-slide-scaler {
+    box-shadow: none;
+}
+
+.remark-code-line:empty {display: none;}
+
+table {
+   border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #282828;
+}
+
+th, td {
+   padding: 0.5em;
+}
+
+thead {
+   background-color: lightgrey;
+}
