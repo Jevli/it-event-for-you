@@ -76,3 +76,8 @@ First we don't probably do web interface but only API but will create web interf
 - We got skeleton of code project done
 - We have "plan" for recommending events
 - We probably got end of this week Evensi api router done :)
+
+---
+class: middle, center
+
+# Questions?
