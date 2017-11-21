@@ -15,6 +15,12 @@ For running in docker-compose (no need to install local database)
 2. Run in root folder `docker-compose up --build -d` to start in background
 3. (Later will be added auto reload for changed node changes)
 
+For reasons docker-compose doesn't seem to work probelly here is version:
+1. First create cassandra container: `docker run --name db -v $PWD/data:/var/lib/cassandra -d cassandra:latest`
+2. Build that to Dockerfile project here: `docker build --name app .`
+3. Connect cassandra to app: `docker run --link db:cassandra -p 3000:3000 -v $PWD/web/:/usr/src/app app`
+`
+
 ## Evensi API
 https://api.evensi.com/v1.1/docs/
 

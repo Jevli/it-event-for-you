@@ -1,9 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
-/* GET evensi-client listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+var authToken;
+/*
+var authentication = (req, res, next) => {
+  if (!authToken) {
+    //Authentication token should be got here if missing
+  }
+  next()
+}
+
+router.use(authentication())
+*/
+
+/* Will get all future events from evensi */
+router.get('/getAllFutureEvents', function(req, res, next) {
+  // Go throught all days
+  // save them to database
 });
 
 module.exports = router;
