@@ -52,12 +52,41 @@ const getHttpsRequest = (url) => {
 // Use Authentication in all requests here
 router.use(authenticate)
 
-/* Will get all future events from evensi */
-router.get('/getAllFutureEvents', (req, res, next) => {
-  // Go throught all days
-  // save them to database
-  console.log(authToken)
-  res.send("Hello")
+router.get('/getAllTags/:locale', (req, res, next) => {
+
+  getHttpsRequest(
+    {
+      host: evensi.evensi_path,
+      path: evensi.api_version + '/category/tag?token=' + authToken + '&locale=' + req.params.locale
+    }
+  ).then( (result) => {
+    if(result.status) {
+      res.json(result.data)
+    } else {
+      console.log("Error on tag search: " + result.error.message)
+      res.redirect('failed')
+    }
+  })
+
+})
+
+// Get EventsofDay expects to have query parameters
+router.get('/getEventsOfDay/:day', (req, res, next) => {
+
+  getHttpsRequest(
+    {
+      host: evensi.evensi_path,
+      path: evensi.api_version + '/event/map?token=' + authToken + '&day=' + req.params.day + '&' + req.query.queryParams
+    }
+  ).then( (result) => {
+    if(result.status) {
+      res.json(result.data)
+    } else {
+      console.log("Error on day of events search: " + result.error.message)
+      res.redirect('failed')
+    }
+  })
+
 })
 
 router.get('/failed', (req, res, next) => {
