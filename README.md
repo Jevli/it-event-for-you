@@ -12,14 +12,10 @@ Recommender system for events for software developers. Helping to find your own 
 
 For running in docker-compose (no need to install local database)
 1. [Install Docker](https://docs.docker.com/engine/installation/)
-2. Run in root folder `docker-compose up --build -d` to start in background
-3. (Later will be added auto reload for changed node changes)
 
 For reasons docker-compose doesn't seem to work probelly here is version:
-1. First create cassandra container: `docker run --name db -v $PWD/data:/var/lib/cassandra -d cassandra:latest`
-2. Build that to Dockerfile project here: `docker build --name app .`
-3. Connect cassandra to app: `docker run --link db:cassandra -p 3000:3000 -v $PWD/web/:/usr/src/app app`
-`
+Huom! salasanan voi vaihtaa ja $pwd pitää korvata windows toolboxissa koko polulla.
+1. First create cassandra container: `$ docker run --name db -p 3306:3306 -e MYSQL_ROOT_PASSWORD=password -v $pwd/data:/var/lib/mysql -d mysql:5.7.20`
 
 ## Evensi API
 https://api.evensi.com/v1.1/docs/
