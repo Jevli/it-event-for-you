@@ -6,22 +6,32 @@ var evensi = require('../config.json').evensi
 var authToken
 
 const authenticate = async (req, res, next) => {
-  if(!authToken) {
+  if(!authToken && req.path != '/failed') {
     try {
-      authToken = await getAuthToken(
+      await getHttpsRequest(
         {
           host: evensi.evensi_path,
           path: evensi.api_version + '/authenticate/app?appid='+ evensi.app_id +'&appsecret=' + evensi.app_secret
         }
-      )
+      ).then( (result) => {
+        if(result.status) {
+          authToken = result.data[0].token
+          next()
+        } else {
+          console.log("Error on authentication: " + result.error.message)
+          res.redirect('failed')
+        }
+      })
     } catch(e) {
       console.log(e)
+      res.redirect('failed')
     }
+  } else {
+    next()
   }
-  next()
 }
 
-const getAuthToken = (url) => {
+const getHttpsRequest = (url) => {
   return new Promise((resolve, reject) => {
     https.get(url, (res) => {
       let body = ''
@@ -31,7 +41,7 @@ const getAuthToken = (url) => {
       })
 
       res.on('end', (d) => {
-        resolve(JSON.parse(body).data[0].token)
+        resolve(JSON.parse(body))
       })
     }).on('error', (e) => {
       reject(e)
@@ -39,14 +49,19 @@ const getAuthToken = (url) => {
   })
 }
 
+// Use Authentication in all requests here
 router.use(authenticate)
 
 /* Will get all future events from evensi */
-router.get('/getAllFutureEvents', function(req, res, next) {
+router.get('/getAllFutureEvents', (req, res, next) => {
   // Go throught all days
   // save them to database
-  console.log("hello")
+  console.log(authToken)
   res.send("Hello")
+})
+
+router.get('/failed', (req, res, next) => {
+  res.send('Something went wrong')
 })
 
 module.exports = router
