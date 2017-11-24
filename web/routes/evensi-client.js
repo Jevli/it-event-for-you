@@ -11,6 +11,7 @@ var authToken
 
 const authenticate = async (req, res, next) => {
   if(!authToken && req.path != '/failed') {
+    console.log("token?")
     try {
       authToken = await evensicli.getAuthToken(
         {
@@ -23,6 +24,8 @@ const authenticate = async (req, res, next) => {
       console.log(error)
       res.redirect('failed')
     }
+  } else {
+    next()
   }
 }
 
@@ -87,7 +90,7 @@ router.get('/getAllTags/:locale', (req, res, next) => {
       res.json(result.data)
     } else {
       console.log("Error on tag search: " + result.error.message)
-      res.redirect('failed')
+      res.redirect('/failed')
     }
   })
 
