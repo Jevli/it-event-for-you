@@ -1,14 +1,13 @@
-const https = require('https')
-
+const HttpsService = require('./HttpsService')
 class EvensiCli {
 
   constructor() {
-
+    const https = new HttpsService()
   }
 
   getAuthToken(url) {
     return new Promise( (resolve, reject) => {
-      getHttpsRequest(url, (result) => {
+      this.getHttpsRequest(url, (result) => {
         if(result.status) {
           console.log('Auth success')
           resolve(result.data[0].token)
@@ -24,7 +23,7 @@ class EvensiCli {
     return []
   }
 
-  getHttpsRequest(url) {
+  getHttpsRequest(url, cb) {
       https.get(url, (res) => {
         let body = ''
 
@@ -33,10 +32,10 @@ class EvensiCli {
         })
 
         res.on('end', (d) => {
-          return JSON.parse(body)
+          cb(JSON.parse(body))
         })
       }).on('error', (e) => {
-        return e;
+        cb(e)
       })
   }
 

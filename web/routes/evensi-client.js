@@ -4,10 +4,29 @@ const moment = require('moment')
 const router = express.Router()
 const evensi = require('../config.json').evensi
 const dateFormat = 'YYYY-M-D'
+const EvensiCli = require('../services/evensicli')
+const evensicli = new EvensiCli()
 
 var authToken
 
 const authenticate = async (req, res, next) => {
+  if(!authToken && req.path != '/failed') {
+    try {
+      authToken = await evensicli.getAuthToken(
+        {
+          host: evensi.evensi_path,
+          path: evensi.api_version + '/authenticate/app?appid='+ evensi.app_id +'&appsecret=' + evensi.app_secret
+        }
+      )
+      next()
+    } catch(error) {
+      console.log(error)
+      res.redirect('failed')
+    }
+  }
+}
+
+/*const authenticate = async (req, res, next) => {
   if(!authToken && req.path != '/failed') {
     try {
       await getHttpsRequest(
@@ -32,7 +51,7 @@ const authenticate = async (req, res, next) => {
   } else {
     next()
   }
-}
+}*/
 
 const getHttpsRequest = (url) => {
   return new Promise((resolve, reject) => {
@@ -64,6 +83,7 @@ router.get('/getAllTags/:locale', (req, res, next) => {
     }
   ).then( (result) => {
     if(result.status) {
+      console.log(result)
       res.json(result.data)
     } else {
       console.log("Error on tag search: " + result.error.message)
