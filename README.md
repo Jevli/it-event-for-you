@@ -146,33 +146,21 @@ Tables:
 - user_event (PK: userid, eventid)
 
 Users:
-+----------+----------+------+-----+---------+----------------+
-| Field    | Type     | Null | Key | Default | Extra          |
-+----------+----------+------+-----+---------+----------------+
-| userid   | int(11)  | NO   | PRI | NULL    | auto_increment |
-| keywords | longtext | YES  |     | NULL    |                |
-+----------+----------+------+-----+---------+----------------+
+- userid   | int(11)  | NO   | PRI | NULL    | auto_increment |
+- keywords | longtext | YES  |     | NULL    |                |
 
 Events:
-+---------------+------------------+------+-----+---------+-------+
-| Field         | Type             | Null | Key | Default | Extra |
-+---------------+------------------+------+-----+---------+-------+
-| eventid       | int(10) unsigned | NO   | PRI | NULL    |       |
-| location      | text             | NO   |     | NULL    |       |
-| start_date    | datetime         | YES  |     | NULL    |       |
-| end_date      | datetime         | YES  |     | NULL    |       |
-| description   | text             | YES  |     | NULL    |       |
-| category_name | text             | YES  |     | NULL    |       |
-| category      | int(11)          | YES  |     | NULL    |       |
-| tag_name      | text             | YES  |     | NULL    |       |
-| tag           | text             | YES  |     | NULL    |       |
-| url           | text             | YES  |     | NULL    |       |
-+---------------+------------------+------+-----+---------+-------+
+- eventid       | int(10) unsigned | NO   | PRI | NULL    |       |
+- location      | text             | NO   |     | NULL    |       |
+- start_date    | datetime         | YES  |     | NULL    |       |
+- end_date      | datetime         | YES  |     | NULL    |       |
+- description   | text             | YES  |     | NULL    |       |
+- category_name | text             | YES  |     | NULL    |       |
+- category      | int(11)          | YES  |     | NULL    |       |
+- tag_name      | text             | YES  |     | NULL    |       |
+- tag           | text             | YES  |     | NULL    |       |
+- url           | text             | YES  |     | NULL    |       |
 
 User_event:
-+---------+------------------+------+-----+---------+-------+
-| Field   | Type             | Null | Key | Default | Extra |
-+---------+------------------+------+-----+---------+-------+
-| userid  | int(11)          | NO   | PRI | NULL    |       |
-| eventid | int(10) unsigned | NO   | PRI | NULL    |       |
-+---------+------------------+------+-----+---------+-------+
+- userid  | int(11)          | NO   | PRI | NULL    |       |
+- eventid | int(10) unsigned | NO   | PRI | NULL    |       |
