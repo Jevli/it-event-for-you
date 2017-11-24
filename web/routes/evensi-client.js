@@ -1,7 +1,9 @@
-var express = require('express')
-var https = require('https')
-var router = express.Router()
-var evensi = require('../config.json').evensi
+const express = require('express')
+const https = require('https')
+const moment = require('moment')
+const router = express.Router()
+const evensi = require('../config.json').evensi
+const dateFormat = 'YYYY-M-D'
 
 var authToken
 
@@ -16,9 +18,10 @@ const authenticate = async (req, res, next) => {
       ).then( (result) => {
         if(result.status) {
           authToken = result.data[0].token
+          console.log('Auth success')
           next()
         } else {
-          console.log("Error on authentication: " + result.error.message)
+          console.log('Error on authentication: ' + result.error.message)
           res.redirect('failed')
         }
       })
@@ -71,12 +74,22 @@ router.get('/getAllTags/:locale', (req, res, next) => {
 })
 
 // Get EventsofDay expects to have query parameters
-router.get('/getEventsOfDay/:day', (req, res, next) => {
+router.get('/getEventsOfDay', (req, res, next) => {
+  const coor = evensi.cities[req.query.city]
+  const date = moment()
+                .add(parseInt(req.query.daysFromNow), 'days')
+                .format(dateFormat)
 
   getHttpsRequest(
     {
       host: evensi.evensi_path,
-      path: evensi.api_version + '/event/map?token=' + authToken + '&day=' + req.params.day + '&' + req.query.queryParams
+      path: evensi.api_version + '/event/map?token=' + authToken
+        + '&date=' + date
+        + '&lat=' + coor.lat
+        + '&lng=' + coor.lng
+        + '&distance=' + 20
+        + '&tag=' + req.query.tags
+        + '&fields=' + "name,description,start_date,end_date,location,category,category_name,tag,tag_name,url"
     }
   ).then( (result) => {
     if(result.status) {
