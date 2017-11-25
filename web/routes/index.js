@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const EvensiCli = require('../services/evensicli')
-const evensicli = new EvensiCli()
+/*const evensicli = new EvensiCli()
 
 /* GET home page. */
 router.get('/readyEvents/:day', (req, res, next) => {
