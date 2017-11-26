@@ -146,21 +146,25 @@ Tables:
 - user_event (PK: userid, eventid)
 
 Users:
+- NAME     | TYPE     | NULL?| KEY | DEFAULT | OTHER 
 - userid   | int(11)  | NO   | PRI | NULL    | auto_increment |
 - keywords | longtext | YES  |     | NULL    |                |
 
 Events:
-- eventid       | int(10) unsigned | NO   | PRI | NULL    |       |
-- location      | text             | NO   |     | NULL    |       |
-- start_date    | datetime         | YES  |     | NULL    |       |
-- end_date      | datetime         | YES  |     | NULL    |       |
-- description   | text             | YES  |     | NULL    |       |
-- category_name | text             | YES  |     | NULL    |       |
-- category      | int(11)          | YES  |     | NULL    |       |
-- tag_name      | text             | YES  |     | NULL    |       |
-- tag           | text             | YES  |     | NULL    |       |
-- url           | text             | YES  |     | NULL    |       |
+- COLUMN NAME   | TYPE             | NULL?| KEY | DEFAULT
+- eventid       | int(10) unsigned | NO   | PRI | NULL
+- location      | text             | NO   |     | NULL
+- start_date    | datetime         | YES  |     | NULL
+- end_date      | datetime         | YES  |     | NULL
+- description   | text             | YES  |     | NULL
+- category_name | text             | YES  |     | NULL
+- category      | int(11)          | YES  |     | NULL
+- tag_name      | text             | YES  |     | NULL
+- tag           | text             | YES  |     | NULL
+- url           | text             | YES  |     | NULL
+- keywords      | text             | YES  |     | NULL
 
 User_event:
-- userid  | int(11)          | NO   | PRI | NULL    |       |
-- eventid | int(10) unsigned | NO   | PRI | NULL    |       |
+- NAME    | TYPE             | NULL?| KEY | DEFAULT
+- userid  | int(11)          | NO   | PRI | NULL
+- eventid | int(10) unsigned | NO   | PRI | NULL
