@@ -144,27 +144,25 @@ Tables:
 - users (PK: userid)
 - events (PK: eventid)
 - user_event (PK: userid, eventid)
+- no table column has default values!
 
 Users:
-- NAME     | TYPE     | NULL?| KEY | DEFAULT | OTHER 
-- userid   | int(11)  | NO   | PRI | NULL    | auto_increment |
-- keywords | longtext | YES  |     | NULL    |                |
+- userid (int(11)) not null, primary key, auto_increment
+- keywords (longtext) null allowed
 
 Events:
-- COLUMN NAME   | TYPE             | NULL?| KEY | DEFAULT
-- eventid       | int(10) unsigned | NO   | PRI | NULL
-- location      | text             | NO   |     | NULL
-- start_date    | datetime         | YES  |     | NULL
-- end_date      | datetime         | YES  |     | NULL
-- description   | text             | YES  |     | NULL
-- category_name | text             | YES  |     | NULL
-- category      | int(11)          | YES  |     | NULL
-- tag_name      | text             | YES  |     | NULL
-- tag           | text             | YES  |     | NULL
-- url           | text             | YES  |     | NULL
-- keywords      | text             | YES  |     | NULL
+- eventid (unsigned int(10)), not null, primary key
+- location (text), not null
+- start_date (datetime), null allowed
+- end_date (datetime), null allowed
+- description (text), null allowed
+- category_name (text), null allowed
+- category (int(11)), null allowed
+- tag_name (text), null allowed
+- tag (text), null allowed
+- url (text), null allowed
+- keywords (text), null allowed
 
 User_event:
-- NAME    | TYPE             | NULL?| KEY | DEFAULT
-- userid  | int(11)          | NO   | PRI | NULL
-- eventid | int(10) unsigned | NO   | PRI | NULL
+- userid (int(11)), not null, primary key
+- eventid (int(10)), not null, primary key
