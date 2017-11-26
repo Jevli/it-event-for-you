@@ -162,6 +162,7 @@ Events:
 - tag (text), null allowed
 - url (text), null allowed
 - keywords (text), null allowed
+- name (text), not null
 
 User_event:
 - userid (int(11)), not null, primary key
