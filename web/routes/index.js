@@ -27,7 +27,6 @@ router.get('/readyEvents', (req, res, next) => {
     res.send('Going throught all events from that day and saving them to database')
 })
 
-// PR for commenting stuff
 router.get('/', (req, res, next) => {
   mockEvents.forEach( (event) => {
     event.events.forEach( (ev) => {
