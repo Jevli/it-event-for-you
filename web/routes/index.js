@@ -15,6 +15,9 @@ router.get('/readyEvents', (req, res, next) => {
   * @param fields, is string list of wanted fields
   * tags ja fieldsit voi kova koodata tänne.
   */
+
+  // new head for comments
+
   evensicli.getEventsOfDay(req.query.daysFromNow, req.query.city)
            .forEach( (event) => { // Tämä käy yksi event kerrallaan läpi
               // TODO Lisää rikastaminen tähän
