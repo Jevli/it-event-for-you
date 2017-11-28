@@ -57,7 +57,7 @@ router.get('/', (req, res, next) => {
   })
 })
 
-getDate = datetime => {
+const getDate = datetime => {
   let date = datetime ? datetime : null
   if (date === null) return null
   if (date.length < 19) return null
@@ -65,14 +65,14 @@ getDate = datetime => {
   return date
 }
 
-getLocation = (location, city) => {
+const getLocation = (location, city) => {
   let loc = location ? location : null
   loc = (loc !== null && city !== null && location !== city) ? loc + ", " : loc
   loc = (city && city !== location) ? loc + city : loc
   return loc
 }
 
-searchKeywords = (name, desc) => {
+const searchKeywords = (name, desc) => {
   let keys = new Array()
   keywords.map( word => {
     if (name) {
