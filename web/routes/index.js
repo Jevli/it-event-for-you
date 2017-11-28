@@ -32,19 +32,19 @@ router.get('/', (req, res, next) => {
     event.events.forEach( (ev) => {
       if (ev.id && ev.name && ev.location.name) {
         const newEvent = {}
-        newEvent['eventid'] = ev.id
-        newEvent['name'] = ev.name
-        newEvent['location'] = getLocation(ev.location.name, ev.location.city)
-        newEvent['start_date'] = getDate(ev.start_date)
-        newEvent['end_date'] = getDate(ev.end_date)
-        newEvent['description'] = ev.short_description ? ev.short_description : null
-        newEvent['category_name'] = ev.category_name ? ev.category_name : null
-        newEvent['category'] = ev.category ? ev.category : null
-        newEvent['tag_name'] = ev.tag_name ? ev.tag_name : null
+        newEvent.eventid = ev.id
+        newEvent.name = ev.name
+        newEvent.location = getLocation(ev.location.name, ev.location.city)
+        newEvent.start_date = getDate(ev.start_date)
+        newEvent.end_date = getDate(ev.end_date)
+        newEvent.description = ev.short_description ? ev.short_description : null
+        newEvent.category_name = ev.category_name ? ev.category_name : null
+        newEvent.category = ev.category ? ev.category : null
+        newEvent.tag_name = ev.tag_name ? ev.tag_name : null
         // Tags are now changed from array to string
-        newEvent['tag'] = ev.tag ? ev.tag.toString() : null
-        newEvent['url'] = ev.url.url ? ev.url.url : null
-        newEvent['keywords'] = searchKeywords(ev.name, ev.short_description)
+        newEvent.tag = ev.tag ? ev.tag.toString() : null
+        newEvent.url = ev.url.url ? ev.url.url : null
+        newEvent.keywords = searchKeywords(ev.name, ev.short_description)
         // TODO: insert into events table
         console.log("");
         console.log(newEvent);
