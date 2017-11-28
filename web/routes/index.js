@@ -1,7 +1,8 @@
 const express = require('express'),
       router = express.Router(),
       EvensiCli = require('../services/evensicli'),
-      evensicli = new EvensiCli()
+      evensicli = new EvensiCli(),
+      config = require('../config.json').params
 
 
 /* Tätä kutsutaan selaimesta: localhost:3000/readyEvents?daysFromNow=0&city=TRE*/
@@ -15,8 +16,9 @@ router.get('/readyEvents', (req, res, next) => {
   * @param fields, is string list of wanted fields
   * tags ja fieldsit voi kova koodata tänne.
   */
-  const tags = "66,17,69,20,13,117,105,70"
-  const fields = "name,short_description,start_date,end_date,location,category,category_name,tag,tag_name,url"
+
+  let fields = config.params.fields ? config.params.fields : ''
+  let tags = config.params.tags ? config.params.tags : ''
 
   evensicli.getEventsOfDay(req.query.daysFromNow, req.query.city)
            .forEach( (event) => { // Tämä käy yksi event kerrallaan läpi
