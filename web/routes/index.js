@@ -30,23 +30,24 @@ router.get('/readyEvents', (req, res, next) => {
 router.get('/', (req, res, next) => {
   mockEvents.forEach( (event) => {
     event.events.forEach( (ev) => {
-      const id = ev.id ? ev.id : null
-      const name = ev.name ? "\"" + ev.name + "\"" : null
-      const start = getDate(ev.start_date)
-      const end = getDate(ev.end_date)
-      const desc = ev.short_description ? "\"" + ev.short_description + "\"" : null
-      const loc = getLocation(ev.location.name, ev.location.city)
-      const category_name = ev.category_name ? "\"" + ev.category_name + "\"" : null
-      const category = ev.category ? ev.category : null
-      const tag_names = ev.tag_name ? "\"" + ev.tag_name + "\"" : null
-      // Tags are now changed from array to string
-      const tags = ev.tag ? "\"" + ev.tag.toString() + "\"": null
-      const url = ev.url.url ? "\"" + ev.url.url + "\"" : null
-      const keywords = searchKeywords(name, desc)
-      // TODO: insert into events table
-      if (id && loc && name) {
-        const sql = "INSERT INTO events (eventid,location,start_date,end_date,description,category_name,category,tag_name,tag,url,keywords,name) VALUES(" + id + "," + loc + "," + start + "," + end + "," + desc + "," + category_name + "," + category + "," + tag_names + "," + tags + "," + url + "," + keywords + "," + name + ");"
-        console.log(sql);
+      if (ev.id && ev.name && ev.location.name) {
+        const newEvent = {}
+        newEvent['eventid'] = ev.id
+        newEvent['name'] = ev.name
+        newEvent['location'] = getLocation(ev.location.name, ev.location.city)
+        newEvent['start_date'] = getDate(ev.start_date)
+        newEvent['end_date'] = getDate(ev.end_date)
+        newEvent['description'] = ev.short_description ? ev.short_description : null
+        newEvent['category_name'] = ev.category_name ? ev.category_name : null
+        newEvent['category'] = ev.category ? ev.category : null
+        newEvent['tag_name'] = ev.tag_name ? ev.tag_name : null
+        // Tags are now changed from array to string
+        newEvent['tag'] = ev.tag ? ev.tag.toString() : null
+        newEvent['url'] = ev.url.url ? ev.url.url : null
+        newEvent['keywords'] = searchKeywords(ev.name, ev.short_description)
+        // TODO: insert into events table
+        console.log("");
+        console.log(newEvent);
       } else {
         console.log("Invalid event info, could not save!");
       }
@@ -59,7 +60,6 @@ getDate = datetime => {
   if (date === null) return null
   if (date.length < 19) return null
   date = date.substring(0,10) + " " + date.substring(11,19)
-  date = "\"" + date + "\""
   return date
 }
 
@@ -67,8 +67,6 @@ getLocation = (location, city) => {
   let loc = location ? location : null
   loc = (loc !== null && city !== null && location !== city) ? loc + ", " : loc
   loc = (city && city !== location) ? loc + city : loc
-  if (loc === null) return loc
-  loc = "\"" + loc + "\""
   return loc
 }
 
@@ -88,7 +86,7 @@ searchKeywords = (name, desc) => {
   })
   if (!keys.length) return null
   const uniqueKeys = keys.filter((v,i,a) => a.indexOf(v) === i)
-  keys = uniqueKeys.length ? "\"" + uniqueKeys.toString() + "\"" : null
+  keys = uniqueKeys.length ? uniqueKeys.toString() : null
   return keys
 }
 
