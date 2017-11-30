@@ -19,8 +19,8 @@ router.get('/readyEvents', (req, res, next) => {
   * tags ja fieldsit voi kova koodata tänne.
   */
 
-  let fields = config.params.fields ? config.params.fields : ''
-  let tags = config.params.tags ? config.params.tags : ''
+  const fields = config.params.fields ? config.params.fields : ''
+  const tags = config.params.tags ? config.params.tags : ''
 
   evensicli.getEventsOfDay(req.query.daysFromNow, req.query.city)
            .forEach( (event) => { // Tämä käy yksi event kerrallaan läpi
