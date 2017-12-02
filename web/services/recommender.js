@@ -17,13 +17,27 @@ class Recommender {
     return eventInfo
   }
 
+  /* Should method only return the first event with largest
+   * keyword count? Or return all the events with the largest
+   * keyword count
+  **/
   findITEvent(days) {
     const events = db.getFutureEvents(days)
-    // what format are the events?
-    // TODO: calculate length of event's keyword list
-    // TODO: recommend the event with longest keyword list
-    const eventInfo = db.getEventData(id)
-    return eventInfo
+    const best
+    const count = 0
+    // if events in array
+    events.map( event => {
+      const keywords = event.keywords
+      const wordcount = keywords.split(',').length
+      if (wordcount > count) {
+        best = event
+        count = wordcount
+      }
+    })
+
+    // TODO: fetch event data if not fetched in earliier query
+    // const eventInfo = db.getEventData(id)
+    return best
   }
 }
 
