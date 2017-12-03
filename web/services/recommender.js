@@ -17,27 +17,44 @@ class Recommender {
     return eventInfo
   }
 
-  /* Should method only return the first event with largest
-   * keyword count? Or return all the events with the largest
-   * keyword count
-  **/
+  // returns 3 events with largest keyword count
   findITEvent(days) {
-    const events = db.getFutureEvents(days)
-    const best
-    const count = 0
-    // if events in array
-    events.map( event => {
-      const keywords = event.keywords
-      const wordcount = keywords.split(',').length
-      if (wordcount > count) {
-        best = event
-        count = wordcount
+    let events = db.getFutureEvents(days)
+    events = calculateKeywordCounts(events)
+    const maxCounts = getMaxKeywordCounts(events)
+    let best3 = []
+    events.forEach( event => {
+      if (maxCounts.length > 0 && event.count == maxCounts[0]) {
+        best3.unshift(event)
+      } else if (maxCounts.length > 1 && event.count == maxCounts[1]) {
+        best3.push(event)
+      } else if (maxCounts.length > 2 && event.count == maxCounts[2]) {
+        best3.push(event)
       }
     })
-
-    // TODO: fetch event data if not fetched in earliier query
+    if (best3.length > 3) {
+      best3 = best3.slice(0,3)
+    }
+    // TODO: fetch event data if not fetched in earlier query
     // const eventInfo = db.getEventData(id)
-    return best
+    return best3
+  }
+
+  calculateKeywordCounts(events) {
+    events.forEach( event => {
+      event.count = event.keywords.split(',').length
+    })
+    return events
+  }
+
+  getMaxKeywordCounts(events) {
+    let counts = []
+    events.forEach( event => {
+      counts.push(event.count)
+    })
+    counts = counts.filter((v, i, a) => a.indexOf(v) === i)
+    counts.sort(function(a, b){return b-a})
+    return counts
   }
 }
 
