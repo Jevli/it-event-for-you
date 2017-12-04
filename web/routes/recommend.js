@@ -11,5 +11,5 @@ router.get('/event/', (req, res, next) => {
 router.get('/itevent', (req, res, next) => {
   const days = req.query.days ? req.query.days : 10
   const itEvent = recommender.findITEvent(days)
-  // TODO: display returned event
+  // TODO: display returned events
 })
