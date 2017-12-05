@@ -22,18 +22,18 @@ class Recommender {
     let events = db.getFutureEvents(days)
     events = calculateKeywordCounts(events)
     const maxCounts = getMaxKeywordCounts(events)
-    const first = []
-    const second = []
-    const third = []
-    events.forEach( event => {
-      if (maxCounts.length > 0 && event.count == maxCounts[0]) {
-        first.push(event)
-      } else if (maxCounts.length > 1 && event.count == maxCounts[1]) {
-        second.push(event)
-      } else if (maxCounts.length > 2 && event.count == maxCounts[2]) {
-        third.push(event)
-      }
-    })
+    let first = []
+    let second = []
+    let third = []
+    if (maxCounts.length > 0) {
+      first = getKeywordCountEvents(events, maxCounts[0])
+    }
+    if (maxCounts.length > 1) {
+        second = getKeywordCountEvents(events, maxCounts[1])
+    }
+    if (maxCounts.length > 2) {
+      third = getKeywordCountEvents(events, maxCounts[2])
+    }
     // TODO: fetch event data if not fetched in earlier query
     // const eventInfo = db.getEventData(id)
     return get3First(first, second, third)
@@ -57,6 +57,16 @@ class Recommender {
       } else return first
     }
     return first
+  }
+
+  getKeywordCountEvents(events, keywordCount) {
+    const tmp = []
+    events.forEach( event => {
+      if (event.count == keywordCount) {
+        tmp.push(event)
+      }
+    })
+    return tmp
   }
 
   getMaxKeywordCounts(events) {
