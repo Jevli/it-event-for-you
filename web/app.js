@@ -7,6 +7,7 @@ const express = require('express'),
 
 const index = require('./routes/index'),
       evensi = require('./routes/evensi')
+      user = require('./routes/user')
 
 const app = express()
 
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
 app.use('/evensi', evensi)
+app.use('/user', user)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
