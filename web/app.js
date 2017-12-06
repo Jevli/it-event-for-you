@@ -6,7 +6,8 @@ const express = require('express'),
       bodyParser = require('body-parser')
 
 const index = require('./routes/index'),
-      evensi = require('./routes/evensi')
+      event = require('./routes/event'),
+      user = require('./routes/user')
 
 const app = express()
 
@@ -23,14 +24,15 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
-app.use('/evensi', evensi)
+app.use('/event', event)
+app.use('/user', user)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   err = new Error('Not Found')
   err.status = 404
   next(err)
-});
+})
 
 // error handler
 app.use((err, req, res, next) => {
@@ -40,6 +42,6 @@ app.use((err, req, res, next) => {
   // render the error page
   res.status(err.status || 500)
   res.render('error')
-});
+})
 
 module.exports = app

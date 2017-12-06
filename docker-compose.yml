@@ -2,11 +2,13 @@ version: '3'
 services:
    web:
       build: .
+      volumes:
+        - ./web:/usr/src/app
       ports:
          - "3000:3000"
       links:
          - db
    db:
-      image: "cassandra:latest"
+      image: "mysql:5.7.20"
       volumes:
-         - ./data:/var/lib/cassandra
+         - ./data:/var/lib/mysql
