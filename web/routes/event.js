@@ -4,6 +4,12 @@ const express = require('express'),
       EvensiCli = require('../utils/evensi'),
       Event = require('../models/event')
 
+router.get('/getAllTags/', (req, res, next) => {
+
+  evensicli.getAllTags(req.query.locale)
+           .then( result => res.json(result) )
+           .catch( err => res.json(err) )
+})
 
 /* Tätä kutsutaan selaimesta: localhost:3000/readyEvents?daysFromNow=0&city=TRE*/
 router.get('/readyEvents', (req, res, next) => {
