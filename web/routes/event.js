@@ -57,6 +57,12 @@ router.get('/', (req, res, next) => {
   })
 })
 
+router.get('/poistaKaikki', (req, res, next) => {
+  Event.deleteAll( (err, result) => {
+    err ? res.json(err) : res.json(result)
+  })
+})
+
 const getDate = datetime => {
   let date = datetime ? datetime : null
   if (date === null) return null
