@@ -1,4 +1,4 @@
-const Database = require('./database-sevice'),
+const Database = require('../utils/dbConnection'),
       db = new Database(),
       keywords = require('../assets/keywords')
 
@@ -11,15 +11,9 @@ class Recommender {
     let first = []
     let second = []
     let third = []
-    if (maxCounts.length > 0) {
-      first = getKeywordCountEvents(events, maxCounts[0])
-    }
-    if (maxCounts.length > 1) {
-        second = getKeywordCountEvents(events, maxCounts[1])
-    }
-    if (maxCounts.length > 2) {
-      third = getKeywordCountEvents(events, maxCounts[2])
-    }
+    if (maxCounts.length > 0) first = getKeywordCountEvents(events, maxCounts[0])
+    if (maxCounts.length > 1) second = getKeywordCountEvents(events, maxCounts[1])
+    if (maxCounts.length > 2) third = getKeywordCountEvents(events, maxCounts[2])
     return get3First(first, second, third)
   }
 
