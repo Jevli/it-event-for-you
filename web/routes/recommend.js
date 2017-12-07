@@ -5,9 +5,7 @@ const express = require('express'),
       recommender = new Recommender()
 
 router.get('/itevent', (req, res, next) => {
-  const days = req.query.days ? req.query.days : 10
-  const itEvent = recommender.findITEvent(days)
-  // TODO: display returned events
-  // ??????
-  res.json(itEvent)
+  const itEvent = recommender.findITEvent( (nayta) => {
+    res.json(nayta)
+  })
 })

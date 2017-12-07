@@ -4,8 +4,8 @@ const Database = require('../utils/dbConnection'),
 
 class Recommender {
   // returns 3 events with largest keyword count
-  findITEvent(days) {
-    let events = db.getFutureEvents(days)
+  findITEvent = cb => {
+    let events = db.getAllFutureEvents()
     events = calculateKeywordCounts(events)
     const maxCounts = getMaxKeywordCounts(events)
     let first = []
@@ -14,17 +14,17 @@ class Recommender {
     if (maxCounts.length > 0) first = getKeywordCountEvents(events, maxCounts[0])
     if (maxCounts.length > 1) second = getKeywordCountEvents(events, maxCounts[1])
     if (maxCounts.length > 2) third = getKeywordCountEvents(events, maxCounts[2])
-    return get3First(first, second, third)
+    cb(get3First(first, second, third))
   }
 
-  calculateKeywordCounts(events) {
+  calculateKeywordCounts = events => {
     events.forEach( event => {
       event.count = event.keywords.split(',').length
     })
     return events
   }
 
-  get3First(first, second, third) {
+  get3First = (first, second, third) => {
     if (first.length == 3) return first
     if (first.length > 3) return first.slice(0,3)
     while (first.length < 3) {
@@ -37,7 +37,7 @@ class Recommender {
     return first
   }
 
-  getKeywordCountEvents(events, keywordCount) {
+  getKeywordCountEvents = (events, keywordCount) => {
     const tmp = []
     events.forEach( event => {
       if (event.count == keywordCount) {
@@ -47,7 +47,7 @@ class Recommender {
     return tmp
   }
 
-  getMaxKeywordCounts(events) {
+  getMaxKeywordCounts = (events) => {
     let counts = []
     events.forEach( event => {
       counts.push(event.count)
