@@ -4,7 +4,7 @@ const express = require('express'),
       Recommender = require('../utils/recommender'),
       recommender = new Recommender()
 
-router.get('/itevent', (req, res, next) => {
+router.get('/rec', (req, res, next) => {
   const itEvent = recommender.findITEvent( (result) => {
     res.json(result)
   })
