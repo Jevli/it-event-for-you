@@ -6,7 +6,7 @@ const express = require('express'),
 
 router.get('/getAllTags/', (req, res, next) => {
 
-  evensicli.getAllTags(req.query.locale)
+  EvensiCli.getAllTags(req.query.locale)
            .then( result => res.json(result) )
            .catch( err => res.json(err) )
 })
@@ -53,6 +53,12 @@ router.get('/readyEvents', (req, res, next) => {
 
 router.get('/', (req, res, next) => {
   Event.getAllEvents( (err, result) => {
+    err ? res.json(err) : res.json(result)
+  })
+})
+
+router.get('deleteAll', (req, res, next) => {
+  Event.deleteAll( (err, results) => {
     err ? res.json(err) : res.json(result)
   })
 })

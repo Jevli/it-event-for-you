@@ -8,9 +8,10 @@ const Events = {
     getAllEvents( () => {
       if (err) return (err)
 
-      
+
     })
-  }
+  },
+  deleteAll: (cb) => db.delete('events')
 }
 
 module.exports = Events
