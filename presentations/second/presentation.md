@@ -25,9 +25,13 @@ First all events were saved, later we only started to save events that matched o
 
 We had a list of keywords
 
-In total almost a hundred words
+Keyword list was constructed by hand, the words were picked up for example from actual Evensi IT events
 
-The names and descriptions of the events were matched with a substring matching (FORMAT SENTENCE)
+The list had in total almost a hundred words
+
+Keywords were searched from event name and description
+
+Searching was done with substring matching
 
 ---
 
@@ -49,7 +53,9 @@ Events could be in Tampere, Helsinki or Turku
 
 # Problems
 
-[ List some problem areas etc. here ]
+Daily Evensi quota for the API calls was really small and we maxed it out several times
+
+It slowed our working since we were unable to get all the data when we needed it
 
 ---
 
