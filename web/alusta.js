@@ -6,44 +6,54 @@ const fields = config.fields ? config.fields : '',
       tags = config.tags ? config.tags : '',
       cities = ['TRE', 'HKI', 'TRU']
 
-for(i=0; i <= 30; i++) {
+const startDay = process.argv[2] ? process.argv[2] : 0
+const endDay = process.argv[3] ? process.argv[3] : 30
 
-  cities.forEach( city => {
-    console.log('Day: ' + i + ' City: ' + city)
-    EvensiCli.getEventsOfDay(i, city, tags, fields)
-            .then( events => {
-              events.forEach( event => {
-                event['events'].forEach( ev => {
-                  if (ev.id && ev.name && ev.location.name) {
-                    const newEvent = {
-                      'eventId': ev.id,
-                      'name': ev.name,
-                      'location': getLocation(ev.location.name, ev.location.city),
-                      'start_date': getDate(ev.start_date),
-                      'end_date': getDate(ev.end_date),
-                      'description': ev.short_description ? ev.short_description : null,
-                      'category_name': ev.category_name ? ev.category_name : null,
-                      'category': ev.category ? ev.category : null,
-                      'tag_name': ev.tag_name ? ev.tag_name : null,
-                      'tag': ev.tag ? ev.tag.toString() : null,
-                      'url': ev.url.url ? ev.url.url : null,
-                      'keywords': searchKeywords(ev.name, ev.short_description)
-                    }
+const getSaveEventsOfDay = (day, cb) => {
+    let a = 0;
+    cities.forEach( city => {
+      EvensiCli.getEventsOfDay(day, city, tags, fields).then ( events => {
+        events.forEach ( event => {
+          a += event.events.length
+          event.events.forEach( ev => {
+            if(ev.id && ev.name && ev.location.name) {
+              const newEvent = {
+                'eventId': ev.id,
+                'name': ev.name,
+                'location': getLocation(ev.location.name, ev.location.city),
+                'start_date': getDate(ev.start_date),
+                'end_date': getDate(ev.end_date),
+                'description': ev.short_description ? ev.short_description : null,
+                'category_name': ev.category_name ? ev.category_name : null,
+                'category': ev.category ? ev.category : null,
+                'tag_name': ev.tag_name ? ev.tag_name : null,
+                'tag': ev.tag ? ev.tag.toString() : null,
+                'url': ev.url.url ? ev.url.url : null,
+                'keywords': searchKeywords(ev.name, ev.short_description)
+              }
 
-                    Event.saveEvent(newEvent, (err, result) => {
-                      err ? console.log(err) : console.log('Saved event: ' + result.insertId)
-                    })
-
-                  } else {
-                    console.log('Invalid event info, could not save!')
-                  }
-                })
-
+              Event.saveEvent(newEvent, (err, result) => {
+                console.log('Day: ' + day + ' City: ' + city + ', ' + a)
+                a--;
+                err ? console.log('Failed to save event') : console.log('Saved event: ' + result.insertId)
+                if (a === 0) {
+                  cb(day++)
+                }
               })
-            }).catch(err => console.log('Err: '+ err))
-  })
-
+            }
+          })
+        })
+      }).catch(err => console.log(err))
+    })
 }
+
+const looping = (day) => {
+  setTimeout( () => {
+    day <= endDay ? getSaveEventsOfDay(0, looping) : process.exit()
+  }, 5000)
+}
+
+getSaveEventsOfDay(startDay, looping)
 
 const getDate = datetime => {
   let date = datetime ? datetime : null
