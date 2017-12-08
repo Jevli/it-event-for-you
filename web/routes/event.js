@@ -57,7 +57,7 @@ router.get('/', (req, res, next) => {
   })
 })
 
-router.get('deleteAll', (req, res, next) => {
+router.get('/deleteAll', (req, res, next) => {
   Event.deleteAll( (err, results) => {
     err ? res.json(err) : res.json(result)
   })
