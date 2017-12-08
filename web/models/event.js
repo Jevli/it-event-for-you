@@ -11,7 +11,7 @@ const Events = {
 
     })
   },
-  deleteAll: (cb) => db.delete('events')
+  deleteAll: (cb) => db.delete('events', cb)
 }
 
 module.exports = Events

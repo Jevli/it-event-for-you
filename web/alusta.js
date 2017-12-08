@@ -6,9 +6,10 @@ const fields = config.fields ? config.fields : '',
       tags = config.tags ? config.tags : '',
       cities = ['TRE', 'HKI', 'TRU']
 
-for(i=0; i <= 0; i++) {
+for(i=0; i <= 30; i++) {
 
   cities.forEach( city => {
+    console.log('Day: ' + i + ' City: ' + city)
     EvensiCli.getEventsOfDay(i, city, tags, fields)
             .then( events => {
               events.forEach( event => {
