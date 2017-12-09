@@ -35,7 +35,7 @@ const getSaveEventsOfDay = (day, cb) => {
               Event.saveEvent(newEvent, (err, result) => {
                 console.log('Day: ' + day + ' City: ' + city + ', ' + a)
                 a--;
-                err ? console.log('Failed to save event') : console.log('Saved event: ' + result.insertId)
+                err ? console.log(err) : console.log('Saved event: ' + result.insertId)
                 if (a === 0) {
                   cb(day++)
                 }
