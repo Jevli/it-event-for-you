@@ -1,10 +1,9 @@
-const Database = require('../utils/dbConnection'),
-      db = new Database(),
+const db = require('../utils/dbConnection'),
       keywords = require('../assets/keywords')
 
-class Recommender {
+const Recommender = {
   // returns 3 events with largest keyword count
-  findITEvent = cb => {
+  findITEvent: cb => {
     let events = db.getAllFutureEvents()
     events = calculateKeywordCounts(events)
     const maxCounts = getMaxKeywordCounts(events)
@@ -15,16 +14,16 @@ class Recommender {
     if (maxCounts.length > 1) second = getKeywordCountEvents(events, maxCounts[1])
     if (maxCounts.length > 2) third = getKeywordCountEvents(events, maxCounts[2])
     cb(get3First(first, second, third))
-  }
+  },
 
-  calculateKeywordCounts = events => {
+  calculateKeywordCounts: (events) => {
     events.forEach( event => {
       event.count = event.keywords.split(',').length
     })
     return events
-  }
+  },
 
-  get3First = (first, second, third) => {
+  get3First: (first, second, third) => {
     if (first.length == 3) return first
     if (first.length > 3) return first.slice(0,3)
     while (first.length < 3) {
@@ -35,9 +34,9 @@ class Recommender {
       } else return first
     }
     return first
-  }
+  },
 
-  getKeywordCountEvents = (events, keywordCount) => {
+  getKeywordCountEvents: (events, keywordCount) => {
     const tmp = []
     events.forEach( event => {
       if (event.count == keywordCount) {
@@ -45,9 +44,9 @@ class Recommender {
       }
     })
     return tmp
-  }
+  },
 
-  getMaxKeywordCounts = (events) => {
+  getMaxKeywordCounts: (events) => {
     let counts = []
     events.forEach( event => {
       counts.push(event.count)
