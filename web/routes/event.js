@@ -63,6 +63,12 @@ router.get('/deleteAll', (req, res, next) => {
   })
 })
 
+router.get('/futureEvent', (req, res, next) => {
+  Event.getFutureEvents( (err, result) => {
+    err ? res.json(err) : res.json(result)
+  })
+})
+
 const getDate = datetime => {
   let date = datetime ? datetime : null
   if (date === null) return null
