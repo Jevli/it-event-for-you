@@ -7,7 +7,8 @@ const express = require('express'),
 
 const index = require('./routes/index'),
       event = require('./routes/event'),
-      user = require('./routes/user')
+      user = require('./routes/user'),
+      rec = require('./routes/rec')
 
 const app = express()
 
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use('/', index)
 app.use('/event', event)
 app.use('/user', user)
+app.use('/rec', rec)
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
