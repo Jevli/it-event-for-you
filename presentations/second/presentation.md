@@ -55,7 +55,7 @@ class: center
 
 - It slowed our working since we were unable to get all the data when we needed it
 
-- Also, saving all events proved problematic, for example, because of Cyrillic alphabet in the names and descriptions
+- Also, saving all events proved problematic, for example, because of Cyrillic alphabet in the names and descriptions (plus other unexpected letters)
 
 ---
 
