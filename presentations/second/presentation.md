@@ -15,7 +15,7 @@ class: middle, center
 
 Database connection was established on Dec 5th
 
-Since then N events were saved from Evensi
+Since then some dozens of events were saved from Evensi
 
 First all events were saved, later we only started to save events that matched one or more keywords
 
@@ -45,9 +45,27 @@ Events could be in Tampere, Helsinki or Turku
 
 ---
 
+# How the events were chosen
+
+All future events were fetched from the database
+
+These events were processed and the keyword count of each event was calculated
+
+The amounts of keywords were also calculated
+
+Then the events with the amounts of the three largest keyword counts were selected and after that the three first returned to the user
+
+The results were showed in JSON
+
+---
+
 # Results
 
-[ Tell stuff about the results ]
+Even with only a couple of dozens events, the recommendation worked well (according to our logic)
+
+More problematic part was finding the keywords
+
+With a more finely tuned keyword search algorithm the results would be more meaningful
 
 ---
 
@@ -56,6 +74,8 @@ Events could be in Tampere, Helsinki or Turku
 Daily Evensi quota for the API calls was really small and we maxed it out several times
 
 It slowed our working since we were unable to get all the data when we needed it
+
+Also, saving all events proved problematic because of Cyrillic alphabets in the names and descriptions
 
 ---
 
