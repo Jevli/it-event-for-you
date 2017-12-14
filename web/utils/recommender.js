@@ -4,7 +4,12 @@ const db = require('../utils/dbConnection'),
 
 const calculateKeywordCounts = (events) => {
   events.forEach( event => {
-    event.count = event.keywords.split(',').length
+    if (event.keywords) {
+      event.count = event.keywords.split(',').length
+    } else {
+      event.count = 0
+    }
+
   })
   return events
 }
